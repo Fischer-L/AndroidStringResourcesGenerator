@@ -166,6 +166,7 @@ public class Utility {
 		 * @param path
 		 * 		The path to the file to be read
 		 * @return
+		 * 		Refer to this.readFileAll(1)
 		 */
 		public static String readFileAll(String path) {
 			
