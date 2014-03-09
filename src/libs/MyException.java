@@ -20,7 +20,7 @@ public class MyException extends Exception {
         
         StackTraceElement p0 = this.getStackTrace()[0]; // The first point where the exception takes place
         
-        String log = ""
+        String log = "!   "
                    + this.getMessage() + " @ "
                    + p0.getLineNumber() + " : "
                    + p0.getFileName();
