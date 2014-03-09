@@ -111,7 +111,7 @@ public class Utility {
 		}
 		
 		/**
-		 * Read out all the file's content
+		 * readFileAll(1): Read out all the file's content
 		 * 
 		 * @param f
 		 *		The file object to be read
@@ -148,6 +148,12 @@ public class Utility {
 						(new MyException("Fail to close the file buffer:" + f.getPath() + "!")).print1stPoint();
 					}
 				}
+			} else {				
+				try {
+					throw new MyException(f.getPath() + " is not a readable file!");
+				} catch (MyException e) {
+					e.print1stPoint();
+				}				
 			}
 			
 			return s;			
@@ -155,10 +161,11 @@ public class Utility {
 
 		
 		/**
-		 * The overload method of this.readFileAll
+		 * readFileAll(2): The overload method of this.readFileAll(1)
 		 * 		
 		 * @param path
 		 * 		The path to the file to be read
+		 * @return
 		 */
 		public static String readFileAll(String path) {
 			
@@ -169,7 +176,7 @@ public class Utility {
     				f.setReadable(true, false);
     				return Utility.Files.readFileAll(f);
     			} else {
-    				throw new MyException(path + " -> No such file or dir to delete!");
+    				throw new MyException(path + " -> No such file to read!");
     			}    			
     		} catch (MyException e) {
     			e.print1stPoint();
@@ -178,7 +185,7 @@ public class Utility {
 		}
 	
 		/**
-		 * Delete one file or one directory(including all stuff inside)
+		 * deleteAll(1): Delete one file or one directory(including all stuff inside)
 		 * 
 		 * @param f
 		 * 		The File object to be deleted
@@ -218,7 +225,7 @@ public class Utility {
 		}
 	
 		/**
-		 * The overload method of this.deleteAll
+		 * deleteAll(2): The overload method of this.deleteAll(1)
 		 * 		
 		 * @param path
 		 * 		The path to the file to be deleted

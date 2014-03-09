@@ -28,18 +28,28 @@ public class UtilityTest_Files {
 		this.testAccesNewFile_S3_deleteAll();
 	}
 	
+	@Test
+	public void testReadFileAll_ReadDirCase() {
+		assertEquals(null, Utility.Files.readFileAll(Constants.TEST_RES_ROOT));
+	}
+	
+	@Test
+	public void testReadFileAll_ReadNothingCase() {
+		assertEquals(null, Utility.Files.readFileAll(this.newFilesRoot));
+	}
+	
 	@Ignore
-	public void bufferFileWriter() {
+	public void testBufferFileWriter() {
 		// Testing this is equal to test the Java API, so not doing the redundant test again.
 	}
 	
 	@Ignore
-	public void bufferFileReader() {
+	public void testBufferFileReader() {
 		// Testing this is equal to test the Java API, so not doing the redundant test again.		
 	}
 	
 	@Ignore
-	public void deleteAll_StringSignature() {
+	public void testDeleteAll_Type2() {
 		// Too simple to test.
 	}
 	
@@ -49,8 +59,8 @@ public class UtilityTest_Files {
 	 **********/
 	private String existingFilePath = Constants.TEST_RES_JSON;
 	private String text = "This is a unit test on Uitility.Files class.";
-	private String rootPath = Constants.RES_ROOT;
-	private String[] paths = Constants.RES_PATHS;
+	private String newFilesRoot = Constants.RES_ROOT;
+	private String[] newFilesPaths = Constants.RES_PATHS;
 	
 	/*
 	 * Assistive methods
@@ -67,7 +77,7 @@ public class UtilityTest_Files {
 	
 	private void testAccesNewFile_S1_WriteFile() {
 		BufferedWriter bw;
-		for (String path : this.paths) {
+		for (String path : this.newFilesPaths) {
 			bw = Utility.Files.bufferFileWriter(Utility.Files.openFile(path, true, true, false, false));
 			try {
 				bw.write(this.text);
@@ -81,14 +91,14 @@ public class UtilityTest_Files {
 
 	private void testAccesNewFile_S2_readFileAll() {
 		File f;
-		for (String path : this.paths) {
+		for (String path : this.newFilesPaths) {
 			f = Utility.Files.openFile(path, true, true, false, false);
 			Assert.assertEquals(this.text, Utility.Files.readFileAll(f));
 		}		
 	}	
 
 	private void testAccesNewFile_S3_deleteAll() {
-		File f = new File(this.rootPath);
+		File f = new File(this.newFilesRoot);
 		Utility.Files.deleteAll(f);
 		assertTrue(!f.exists());		
 	}
