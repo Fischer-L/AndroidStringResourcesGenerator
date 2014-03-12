@@ -291,7 +291,7 @@ public class AndroidStringXML {
 	        	
 	        	if (list.size() > 0) {
 	        		
-	        		Class targetCls;
+	        		Class<? extends Object> targetCls;
 	        		StringBuilder sb = new StringBuilder();
 	        		
 	        		try {

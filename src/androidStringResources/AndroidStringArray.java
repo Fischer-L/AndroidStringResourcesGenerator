@@ -1,7 +1,6 @@
 package androidStringResources;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * This class represent the string array element in the Android's strings.xml file. In the strings.xml, it is like:

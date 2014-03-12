@@ -6,6 +6,11 @@ package libs;
 public class MyException extends Exception {
     
 	/**
+	 * The default serial version ID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * @param msg
 	 * 		The exception message
 	 */
