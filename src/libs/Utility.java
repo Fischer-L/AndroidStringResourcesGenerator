@@ -3,10 +3,13 @@ package libs;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 
 /**
  * The class encompassing the utility classes and methods
@@ -34,14 +37,15 @@ public class Utility {
 		 */
 		public static BufferedWriter bufferFileWriter(File f) {
     		try {
-    			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+    			BufferedWriter  bw = new BufferedWriter(
+    									new OutputStreamWriter(new FileOutputStream(f), "UTF8")
+									 );    			
     			return bw;
 			} catch (IOException e) {
 				(new MyException("Fail to create the BufferedWriter instance!")).print1stPoint();
 				return null;
 			}
 		}
-
 		
 		/**
 		 * Buffer the File object for reading
@@ -53,12 +57,15 @@ public class Utility {
 		 * 		<br/>
 		 * 		- If NG: null
 		 */
-		public static BufferedReader bufferFileReader(File f) {
+		public static BufferedReader bufferFileReader(File f, String charset) {
 			try {
-				BufferedReader br = new BufferedReader(new FileReader(f));
+				BufferedReader br;
+				br = new BufferedReader(
+						 new InputStreamReader(new FileInputStream(f), charset)
+					 );
 				return br;
-			} catch (FileNotFoundException e) {
-				(new MyException("Fail to create the BufferedReader instance!")).print1stPoint();
+			} catch (FileNotFoundException | UnsupportedEncodingException e) { 
+				(new MyException("Fail to create the BufferedReader instance because of " + e.getMessage())).print1stPoint();
 				return null;
 			}
 		}
@@ -115,18 +122,20 @@ public class Utility {
 		 * 
 		 * @param f
 		 *		The file object to be read
+		 * @param charset
+		 * 		The charset; refer to the java.io.InputStreamReader constructor for the valid charsets
 		 * @return
 		 * 		- If OK: The file content
 		 * 		<br/>
 		 * 		- If NG: null
 		 */
-		public static String readFileAll(File f) {
+		public static String readFileAll(File f, String charset) {
 						
 			String s = null;
 			
 			if (f.isFile()) {
 				
-				BufferedReader br = Utility.Files.bufferFileReader(f);
+				BufferedReader br = Utility.Files.bufferFileReader(f, charset);
 				
 				if (br != null) {
 					
@@ -158,7 +167,6 @@ public class Utility {
 			
 			return s;			
 		}
-
 		
 		/**
 		 * readFileAll(2): The overload method of this.readFileAll(1)
@@ -168,14 +176,14 @@ public class Utility {
 		 * @return
 		 * 		Refer to this.readFileAll(1)
 		 */
-		public static String readFileAll(String path) {
+		public static String readFileAll(String path, String charset) {
 			
     		File f = new File(path);    		
     		
     		try {    			
     			if (f.exists()) {
     				f.setReadable(true, false);
-    				return Utility.Files.readFileAll(f);
+    				return Utility.Files.readFileAll(f, charset);
     			} else {
     				throw new MyException(path + " -> No such file to read!");
     			}    			
@@ -245,5 +253,6 @@ public class Utility {
     			e.print1stPoint();
     		}
 		}
+				
 	}
 }

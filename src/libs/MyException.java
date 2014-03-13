@@ -5,6 +5,7 @@ package libs;
  */
 public class MyException extends Exception {
     
+
 	/**
 	 * The default serial version ID
 	 */
