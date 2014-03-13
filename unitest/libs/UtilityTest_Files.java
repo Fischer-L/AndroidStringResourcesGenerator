@@ -30,12 +30,12 @@ public class UtilityTest_Files {
 	
 	@Test
 	public void testReadFileAll_ReadDirCase() {
-		assertEquals(null, Utility.Files.readFileAll(Constants.TEST_RES_ROOT));
+		assertEquals(null, Utility.Files.readFileAll(Constants.TEST_RES_ROOT, "UTF-8"));
 	}
 	
 	@Test
 	public void testReadFileAll_ReadNothingCase() {
-		assertEquals(null, Utility.Files.readFileAll(this.newFilesRoot));
+		assertEquals(null, Utility.Files.readFileAll(this.newFilesRoot, "UTF-8"));
 	}
 	
 	@Ignore
@@ -71,7 +71,7 @@ public class UtilityTest_Files {
 	}
 	
 	private void testAccesExistingFile_S2_readFileAll() {
-		String reads = Utility.Files.readFileAll(Utility.Files.openFile(this.existingFilePath, true, false, false, false));
+		String reads = Utility.Files.readFileAll(Utility.Files.openFile(this.existingFilePath, true, true, false, false), "UTF-8");
 		assertEquals(Constants.TEST_RES_JSON_CONTENT, reads);
 	}
 	
@@ -93,7 +93,7 @@ public class UtilityTest_Files {
 		File f;
 		for (String path : this.newFilesPaths) {
 			f = Utility.Files.openFile(path, true, true, false, false);
-			Assert.assertEquals(this.text, Utility.Files.readFileAll(f));
+			Assert.assertEquals(this.text, Utility.Files.readFileAll(f, "UTF-8"));
 		}		
 	}	
 

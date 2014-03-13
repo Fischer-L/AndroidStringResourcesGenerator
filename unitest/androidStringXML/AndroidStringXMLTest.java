@@ -79,13 +79,13 @@ public class AndroidStringXMLTest {
 		for (int i = 0; i < langs.length; i++) {
 			Assert.assertEquals(
 				fp.getExpectedXML(langs[i]),
-				Utility.Files.readFileAll(Utility.Files.openFile(String.format(pathTmpl, "-" + langs[i]), true, false, false, false))
+				Utility.Files.readFileAll(Utility.Files.openFile(String.format(pathTmpl, "-" + langs[i]), true, false, false, false), "UTF-8")
 			);			
 		}
 
 		Assert.assertEquals(
 				fp.getExpectedXML(fp.getRealDefaultLang()),
-				Utility.Files.readFileAll(Utility.Files.openFile(String.format(pathTmpl, ""), true, false, false, false))
+				Utility.Files.readFileAll(Utility.Files.openFile(String.format(pathTmpl, ""), true, false, false, false), "UTF-8")
 		);
 	}
 	
